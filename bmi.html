@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMI Calculator</title>
+    <style>
+        body {
+  background-image: url('images/buddha-bowl-dish-with-vegetables-legumes-top-view.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+}
+        body {
+            font-family: Arial, sans-serif;
+            padding:10%;
+            
+  
+
+        }
+
+        
+
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 40px;
+            
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+        label {
+            display: block;
+            color: #fff;
+            margin-bottom: 5px;
+            font-weight: bolder;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+        }
+.btn{
+   display: block;
+   margin-top: 1rem;
+   padding: 1rem 3rem;
+   border: .1rem solid var(--main-color);
+   border-radius: .5rem;
+   cursor: pointer;
+   font-size: 3rem;
+   font-weight: bold;
+   color: var(--main-color);
+}
+
+.btn:hover{
+   background: var(--main-color);
+   color: var(--white);
+}
+.newsletter .content form .btn{
+   margin-top: 0;
+   background: none;
+}
+
+.newsletter .content form .btn:hover{
+   background: var(--main-color);
+}
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BMI Calculator</h1>
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" placeholder="Enter your height in centimeters">
+        
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" placeholder="Enter your weight in kilograms">
+        
+        <button onclick="calculateBMI()">Calculate BMI</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById("height").value);
+            const weight = parseFloat(document.getElementById("weight").value);
+
+            if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+                document.getElementById("result").innerHTML = "Please enter valid height and weight values.";
+                return;
+            }
+
+            const bmi = weight / ((height / 100) ** 2);
+            let message = `Your BMI is ${bmi.toFixed(2)}. `;
+
+            if (bmi < 18.5) {
+                message += "You are underweight. Consider increasing your calorie intake.";
+                message += '<button onclick="showDietPlan(\'underweight.html\')" class="button">Diet Plan for Underweight</button>';
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                message += "You have a normal weight. Maintain a balanced diet.";
+                message += '<button onclick="showDietPlan(\'balancediet.html\')" class="button">Diet Plan for Normalweight</button>';
+            } else if (bmi >= 25 && bmi < 29.9) {
+                message += "You are overweight. Consider reducing calorie intake and exercising.";
+                message += '<button onclick="showDietPlan(\'obesitydiet.html\')" class="button">Diet Plan for Overweight</button>';
+            } else {
+                message += "You are obese. Consult a healthcare professional for guidance.";
+                message += '<button onclick="showDietPlan(\'\')" class="button">Consult a healthcare professional for guidance.</button>';
+            }
+            
+
+            document.getElementById("result").innerHTML = message;
+        }
+
+        function showDietPlan(url) {
+        window.location.href = url;
+    }
+        
+    </script>
+    
+</body>
+</html>
+
